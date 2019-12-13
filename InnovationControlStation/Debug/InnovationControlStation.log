@@ -1,0 +1,9 @@
+﻿  uic InnovationControlStation.ui
+  rcc InnovationControlStation.qrc
+  moc InnovationControlStation.h
+   RCC: Warning: No resources in 'C:\Users\Everett\Desktop\Innovation\InnovationControlStation\InnovationControlStation\InnovationControlStation.qrc'.
+  InnovationControlStation.cpp
+  main.cpp
+  qrc_InnovationControlStation.cpp
+  moc_InnovationControlStation.cpp
+  InnovationControlStation.vcxproj -> C:\Users\Everett\Desktop\Innovation\InnovationControlStation\Win32\Debug\InnovationControlStation.exe
