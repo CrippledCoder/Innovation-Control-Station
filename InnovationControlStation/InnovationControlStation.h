@@ -9,7 +9,11 @@ class InnovationControlStation : public QMainWindow
 
 public:
 	InnovationControlStation(QWidget *parent = Q_NULLPTR);
-
+private slots:
+	void test();
 private:
 	Ui::InnovationControlStationClass ui;
+	QPushButton *LoginButton;
+	QPushButton *CloseButton;
 };
+
