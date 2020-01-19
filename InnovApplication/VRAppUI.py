@@ -9,6 +9,16 @@ import hashlib, binascii, os
 from PyQt5 import QtWidgets
 from styleSheet import *
 
+'''
+def closeEvent(self, event):
+    msg = QMessageBox.question(self, "Close Admin", "Are you sure you want to close without saving?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No )
+    if msg == QMessageBox.Yes:
+        self.switchWindow.emit("h", self)
+        event.accept()
+    else:
+        event.ignore()
+'''
+
 def vSpacer(size):
     return QSpacerItem(0, size, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
@@ -71,6 +81,9 @@ class Login(QWidget):
         buttonLayout.addWidget(buttonCancel)
         buttonCancel.clicked.connect(self.goBack)
 
+        buttonLogin.setStyleSheet(passButtonStyle)
+        buttonCancel.setStyleSheet(cancelButtonStyle)
+
         layout.addLayout(inputLayout)
         layout.addLayout(buttonLayout)
 
@@ -80,6 +93,7 @@ class Login(QWidget):
 
     def checkPassword(self):
         msg = QMessageBox()
+        msg.setWindowTitle('Status')
         enteredPass = str(self.passwordContainer.text())
         with open("login.txt", "r") as file:
             savedPass = file.read()
@@ -87,19 +101,13 @@ class Login(QWidget):
         #if self.verify_password(savedPass, enteredPass):
         if True:
             #msg.setText('Success')
+            # msg.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
             #msg.exec_()
             self.switchWindow.emit("a", self)
         else:
             msg.setText('Incorrect Password')
+            msg.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
             msg.exec_()
-
-    def hash_password(self, password):
-        """Hash a password for storing."""
-        salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
-        pwdhash = hashlib.pbkdf2_hmac('sha512', password.encode('utf-8'),
-                                      salt, 100000)
-        pwdhash = binascii.hexlify(pwdhash)
-        return (salt + pwdhash).decode('ascii')
 
     def verify_password(self, stored_password, provided_password):
         """Verify a stored password against one provided by user"""
@@ -113,6 +121,102 @@ class Login(QWidget):
         return pwdhash == stored_password
 
 
+class passChange(QWidget):
+    """
+        The password change client for the admin of the application
+
+        This will take in the user input, check the previous pass and save a new password.
+
+        attr:
+            lineEdit_password (QLineEdit): Sets attr of password container
+
+        functions:
+            initUI(self): This starts the specific window
+            closeEvent(self): Handles the exiting of the window
+            checkPassword(self): Handles what happens to the windows after
+                the user submits a password
+            hash_password(self, password): Hashes a password filed. Also used
+                in the admin panel.
+            verify_password(self, stored_password, provided_password): Handles
+                the comparison of passwords from the user and the supplied file
+    """
+    switchWindow = QtCore.pyqtSignal(str, QWidget)
+
+    def __init__(self):
+        super().__init__()
+        self.prevPasswordContainer = QLineEdit()
+        self.newPasswordContainer = QLineEdit()
+        self.resize(500, 200)
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint);
+
+        self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
+        inputLayout = QHBoxLayout()
+        buttonLayout = QHBoxLayout()
+
+        self.prevPasswordContainer.setPlaceholderText('Previous password')
+        self.prevPasswordContainer.setStyleSheet("font: 25px;")
+        self.newPasswordContainer.setPlaceholderText('New password')
+        self.newPasswordContainer.setStyleSheet("font: 25px;")
+
+        inputLayout.addWidget(self.prevPasswordContainer)
+        inputLayout.addWidget(self.newPasswordContainer)
+
+        buttonChange = QPushButton('Change')
+        buttonLayout.addWidget(buttonChange)
+        buttonChange.clicked.connect(self.checkPassword)
+
+        buttonCancel = QPushButton('Cancel')
+        buttonLayout.addWidget(buttonCancel)
+        buttonCancel.clicked.connect(self.close)
+
+        buttonChange.setStyleSheet(passButtonStyle)
+        buttonCancel.setStyleSheet(cancelButtonStyle)
+
+        self.layout.addLayout(inputLayout)
+        self.layout.addLayout(buttonLayout)
+
+    def checkPassword(self):
+        msg = QMessageBox()
+        msg.setWindowTitle('Status')
+        enteredPass = str(self.prevPasswordContainer.text())
+        with open("login.txt", "r") as file:
+            savedPass = file.read()
+
+        if self.verify_password(savedPass, enteredPass):
+            self.hash_password(self.prevPasswordContainer.text())
+            msg.setText('Password Changed!')
+            msg.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
+            msg.exec_()
+            self.close()
+        else:
+            msg.setText('Incorrect Previous Password')
+            msg.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
+            msg.exec_()
+
+    def hash_password(self, password):
+        """Hash a password for storing."""
+        salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
+        pwdhash = hashlib.pbkdf2_hmac('sha512', password.encode('utf-8'),
+                                      salt, 100000)
+        pwdhash = binascii.hexlify(pwdhash)
+        with open("login.txt", "w") as file:
+            file.write((salt + pwdhash).decode('ascii'))
+
+    def verify_password(self, stored_password, provided_password):
+        """Verify a stored password against one provided by user"""
+        salt = stored_password[:64]
+        stored_password = stored_password[64:]
+        pwdhash = hashlib.pbkdf2_hmac('sha512',
+                                      provided_password.encode('utf-8'),
+                                      salt.encode('ascii'),
+                                      100000)
+        pwdhash = binascii.hexlify(pwdhash).decode('ascii')
+        return pwdhash == stored_password
+
 class AdminPanel(QWidget):
     """
 
@@ -122,8 +226,9 @@ class AdminPanel(QWidget):
     def __init__(self):
         super().__init__()
         self.title = "Admin Panel"
-        self.width = 1500
-        self.height = 1000
+        self.width = 700
+        self.height = 500
+        self.move(200, 200)
         self.initUI()
 
     def initUI(self):
@@ -138,30 +243,45 @@ class AdminPanel(QWidget):
 
 
         # Button Maker
-        freeFlyButton = QPushButton("Free Fly")
-        missionsButton = QPushButton("Missions")
-        customButton = QPushButton("Custom")
-        adminButton = QPushButton("Admin")
+        appStartButton = QPushButton("Start Up App Select")
+        fileCopyButton = QPushButton("File Copier")
+        passChangeButton = QPushButton("Change Password")
+        profileLoader = QPushButton("Profile Loader")
 
         # Button Styler
-        freeFlyButton.setStyleSheet(buttonStyle)
-        missionsButton.setStyleSheet(buttonStyle)
-        customButton.setStyleSheet(buttonStyle)
-        adminButton.setStyleSheet(buttonStyle)
+        appStartButton.setStyleSheet(adminButtonStyle)
+        fileCopyButton.setStyleSheet(adminButtonStyle)
+        passChangeButton.setStyleSheet(adminButtonStyle)
+        profileLoader.setStyleSheet(adminButtonStyle)
 
-        # bottom right quadrant
-        layout.addWidget(freeFlyButton, 0, 0)
-        layout.addWidget(missionsButton, 0, 1)
-        layout.addWidget(customButton, 1, 0)
-        layout.addWidget(adminButton, 1, 1)
+        # Button Organizer
+        layout.addWidget(appStartButton, 0, 0)
+        layout.addWidget(fileCopyButton, 0, 1)
+        layout.addWidget(passChangeButton, 1, 0)
+        layout.addWidget(profileLoader, 1, 1)
+
+        appStartButton.clicked.connect(self.appStarter)
+        fileCopyButton.clicked.connect(self.fileCopy)
+        passChangeButton.clicked.connect(self.passChange)
+        profileLoader.clicked.connect(self.profileLoad)
+
+    @pyqtSlot()
+    def appStarter(self):
+        pass
+
+    def fileCopy(self):
+        pass
+
+    def passChange(self):
+        self.pChange = passChange()
+        self.pChange.show()
+
+    def profileLoad(self):
+        pass
 
     def closeEvent(self, event):
-        msg = QMessageBox.question(self, "Close Admin", "Are you sure you want to close without saving?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No )
-        if msg == QMessageBox.Yes:
-            self.switchWindow.emit("h", self)
-            event.accept()
-        else:
-            event.ignore()
+        self.switchWindow.emit("h", self)
+        event.accept()
 
 
 class VRAppUI(QWidget):
@@ -185,7 +305,7 @@ class VRAppUI(QWidget):
             adminClick(self): Handles the signal if admin is clicked
     """
 
-    switch_window = QtCore.pyqtSignal(str)
+    switchWindow = QtCore.pyqtSignal(str)
 
     def __init__(self):
         super().__init__()
@@ -323,16 +443,16 @@ class VRAppUI(QWidget):
 
     @pyqtSlot()
     def freePlayClick(self):
-        self.switch_window.emit("f")
+        self.switchWindow.emit("f")
 
     def missionsClick(self):
-        self.switch_window.emit("m")
+        self.switchWindow.emit("m")
 
     def customClick(self):
-        self.switch_window.emit("c")
+        self.switchWindow.emit("c")
 
     def adminClick(self):
-        self.switch_window.emit("l")
+        self.switchWindow.emit("l")
 
 
 
@@ -360,7 +480,7 @@ class Controller:
 
     # this connects to the main function and gets the program going
     def start(self):
-        self.main.switch_window.connect(self.which)
+        self.main.switchWindow.connect(self.which)
         self.main.show()
 
     # when a button is selected, this decides which of the windows will open
