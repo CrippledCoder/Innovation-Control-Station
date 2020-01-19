@@ -70,7 +70,6 @@ class Login(QWidget):
         self.passwordContainer.setPlaceholderText('Please enter password')
         self.passwordContainer.setStyleSheet("font: 25px;")
 
-        #inputLayout.addWidget(labelPassword)
         inputLayout.addWidget(self.passwordContainer)
 
         buttonLogin = QPushButton('Login')
@@ -98,11 +97,7 @@ class Login(QWidget):
         with open("login.txt", "r") as file:
             savedPass = file.read()
 
-        #if self.verify_password(savedPass, enteredPass):
-        if True:
-            #msg.setText('Success')
-            # msg.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
-            #msg.exec_()
+        if self.verify_password(savedPass, enteredPass):
             self.switchWindow.emit("a", self)
         else:
             msg.setText('Incorrect Password')
@@ -128,17 +123,16 @@ class passChange(QWidget):
         This will take in the user input, check the previous pass and save a new password.
 
         attr:
-            lineEdit_password (QLineEdit): Sets attr of password container
+            prevPasswordContainer (QLineEdit()): Takes in the previous password
+            newPasswordContainer (QLineEdit()): Takes in the new password
 
         functions:
             initUI(self): This starts the specific window
-            closeEvent(self): Handles the exiting of the window
             checkPassword(self): Handles what happens to the windows after
                 the user submits a password
-            hash_password(self, password): Hashes a password filed. Also used
-                in the admin panel.
+            hash_password(self, password): Hashes the new password and files it
             verify_password(self, stored_password, provided_password): Handles
-                the comparison of passwords from the user and the supplied file
+                the comparison of old passwords from the user and the supplied file
     """
     switchWindow = QtCore.pyqtSignal(str, QWidget)
 
@@ -187,7 +181,7 @@ class passChange(QWidget):
             savedPass = file.read()
 
         if self.verify_password(savedPass, enteredPass):
-            self.hash_password(self.prevPasswordContainer.text())
+            self.hash_password(self.newPasswordContainer.text())
             msg.setText('Password Changed!')
             msg.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
             msg.exec_()
@@ -216,6 +210,20 @@ class passChange(QWidget):
                                       100000)
         pwdhash = binascii.hexlify(pwdhash).decode('ascii')
         return pwdhash == stored_password
+
+class fileCopy(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.title = "Admin Panel"
+        self.width = 1500
+        self.height = 1000
+        self.initUI()
+
+    def initUI(self):
+        layout = QGridLayout()
+        self.setWindowTitle(self.title)
+        self.setFixedSize(self.width, self.height)
+        self.setLayout(layout)
 
 class AdminPanel(QWidget):
     """
@@ -270,7 +278,8 @@ class AdminPanel(QWidget):
         pass
 
     def fileCopy(self):
-        pass
+        self.fCopy = fileCopy()
+        self.fCopy.show()
 
     def passChange(self):
         self.pChange = passChange()
@@ -507,11 +516,9 @@ class Controller:
 
     # when that respective window is closed, this returns the screen back to the main screen
     def home(self, window):
-        print("here")
         self.main.setEnabled(True)
         window.close()
         self.main.show()
-        print("here")
 
 
 def main():
