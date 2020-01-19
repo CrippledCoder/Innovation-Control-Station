@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e6154c71-2a33-4873-ae8e-d5e4ee5711d9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VRApplication.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VRApplication.ui" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\Everett\Desktop\Innovation\InnovApplication\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1WbELX5vxJlvv92xz1nwuWTRcYf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.VRAppUI">
+    <configuration name="VRAppUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="InnovApplication" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VRAppUI.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="VRApplication" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="InnovApplication" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VRApplication.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="passwordhash" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="InnovApplication" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/passwordhash.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.VRAppUI" />
+        <item itemvalue="Python.passwordhash" />
+        <item itemvalue="Python.VRApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e6154c71-2a33-4873-ae8e-d5e4ee5711d9" name="Default Changelist" comment="" />
+      <created>1579409838962</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1579409838962</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="283" y="212" key="#VRAppUI" timestamp="1579410464909">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state x="283" y="212" key="#VRAppUI/0.0.2194.1194@0.0.2194.1194" timestamp="1579410464909" />
+    <state x="304" y="404" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579432643173">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state x="304" y="404" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2194.1194@0.0.2194.1194" timestamp="1579432643173" />
+    <state x="336" y="339" key="FileChooserDialogImpl" timestamp="1579409913318">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state x="336" y="339" key="FileChooserDialogImpl/0.0.2194.1194@0.0.2194.1194" timestamp="1579409913318" />
+    <state width="1110" height="330" key="GridCell.Tab.0.bottom" timestamp="1579434793430">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1516" height="330" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
+    <state width="1110" height="330" key="GridCell.Tab.0.bottom/0.0.2194.1194@0.0.2194.1194" timestamp="1579434793430" />
+    <state width="1110" height="330" key="GridCell.Tab.0.center" timestamp="1579434793430">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1516" height="330" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
+    <state width="1110" height="330" key="GridCell.Tab.0.center/0.0.2194.1194@0.0.2194.1194" timestamp="1579434793430" />
+    <state width="1110" height="330" key="GridCell.Tab.0.left" timestamp="1579434793430">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1516" height="330" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
+    <state width="1110" height="330" key="GridCell.Tab.0.left/0.0.2194.1194@0.0.2194.1194" timestamp="1579434793430" />
+    <state width="1110" height="330" key="GridCell.Tab.0.right" timestamp="1579434793430">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1516" height="330" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
+    <state width="1110" height="330" key="GridCell.Tab.0.right/0.0.2194.1194@0.0.2194.1194" timestamp="1579434793430" />
+    <state width="1110" height="408" key="GridCell.Tab.1.bottom" timestamp="1579433015616">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1110" height="408" key="GridCell.Tab.1.bottom/0.0.2194.1194@0.0.2194.1194" timestamp="1579433015616" />
+    <state width="1110" height="408" key="GridCell.Tab.1.center" timestamp="1579433015616">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1110" height="408" key="GridCell.Tab.1.center/0.0.2194.1194@0.0.2194.1194" timestamp="1579433015616" />
+    <state width="1110" height="408" key="GridCell.Tab.1.left" timestamp="1579433015616">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1110" height="408" key="GridCell.Tab.1.left/0.0.2194.1194@0.0.2194.1194" timestamp="1579433015616" />
+    <state width="1110" height="408" key="GridCell.Tab.1.right" timestamp="1579433015616">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1110" height="408" key="GridCell.Tab.1.right/0.0.2194.1194@0.0.2194.1194" timestamp="1579433015616" />
+    <state x="65" y="240" key="SettingsEditor" timestamp="1579418474256">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state x="65" y="240" key="SettingsEditor/0.0.2194.1194@0.0.2194.1194" timestamp="1579418474256" />
+    <state x="258" y="269" width="672" height="678" key="search.everywhere.popup" timestamp="1579426157074">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state x="258" y="269" width="672" height="678" key="search.everywhere.popup/0.0.2194.1194@0.0.2194.1194" timestamp="1579426157074" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
