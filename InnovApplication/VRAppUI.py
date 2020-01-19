@@ -7,16 +7,36 @@ from PyQt5.QtCore import pyqtSlot
 import sys
 import hashlib, binascii, os
 
-
 class Login(QWidget):
+    """
+        The Login client for the admin panel.
 
+        This will take in the user input, processes it with the saved password file that
+        is in the same file and then will compare the input. Password file was created
+        so that a password would not need to be hardcoded into the system.
+
+        On success of password -> admin panel
+        On close of window -> main panel
+
+        functions:
+            initUI(self): This starts the specific window
+            closeEvent(self): Handles the exiting of the window
+            checkPassword(self): Handles what happens to the windows after
+                the user submits a password
+            hash_password(self, password): Hashes a password filed. Also used
+                in the admin panel.
+            verify_password(self, stored_password, provided_password): Handles
+                the comparison of passwords from the user and the supplied file
+    """
     switch_window = QtCore.pyqtSignal(str, QWidget)
 
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Login Form')
         self.resize(500, 120)
+        self.initUI()
 
+    def initUI(self):
         layout = QGridLayout()
 
         label_password = QLabel('<font size="4"> Password </font>')
@@ -32,8 +52,14 @@ class Login(QWidget):
 
         self.setLayout(layout)
 
-        #quit = QAction("Quit", self)
-        #quit.triggered.connect()
+    # Good example of how to use the window close
+    def closeEvent(self, event):
+        try:
+            self.switch_window.emit("h", self)
+            event.accept()
+        except:
+            event.ignore()
+
 
 
     def check_password(self):
@@ -71,6 +97,27 @@ class Login(QWidget):
 
 
 class VRAppUI(QWidget):
+    """
+        The main window for the overall client.
+
+        This is where the user can access all the subsystem he or she would like
+        to use for the flight simulator. This window cannot be exited out of but
+        will be closed on window shutdown.
+
+        attr:
+            title (str): The title of the window top bar
+            width (int): The width of the window in pixels
+            height (int): the height of the window in pixels
+
+        functions:
+            initUI(self): Loads the main window and handles the design of the window
+            freePlayClick(self): Handles the signal if Free Fly is clicked
+            missionsClick(self): Handles the signal if missions is clicked
+            customClick(self): Handles the signal if custom is clicked
+            adminClick(self): Handles the signal if admin is clicked
+            vSpacer(self, size): A simple function to add a vertical spacer
+            hSpacer(self, size): A simple function to ad a horizontal spacer
+    """
 
     switch_window = QtCore.pyqtSignal(str)
 
@@ -123,11 +170,12 @@ class VRAppUI(QWidget):
         comboFlight.addItem("Y Flight")
         comboFlight.addItem("Z Flight")
 
-        # stylesheet area
+        # STYLE SHEET AREA
+        # Button Styling
         buttonStyle = '''QPushButton {
                                         box-shadow: 3px 4px 0px 0px #1564ad;
                                         background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0.05 #79bbff, stop:1 #378de5);
-                                        border-radius:5px;
+                                        border-radius:10px;
                                         border:1px solid #337bc4;
                                         display:inline-block;
                                         cursor:pointer;
@@ -154,6 +202,7 @@ class VRAppUI(QWidget):
         customButton.setStyleSheet(buttonStyle)
         adminButton.setStyleSheet(buttonStyle)
 
+        # Label Styling
         leftLabel.setText('''<p>
                                 <font size="15"><b>Welcome to Texan VR <br>Control Center!</b></font>
                              </p>
@@ -183,7 +232,8 @@ class VRAppUI(QWidget):
         rightTopSqLabel.setAlignment(Qt.AlignRight)
         rightTopFlightLabel.setAlignment(Qt.AlignRight)
 
-        # Item Organizing
+        # ORGANIZING THE LAYOUTS
+        # Main Grid
         grid_layout.addWidget(leftLabel, 0, 0)
         grid_layout.addLayout(rightLayout, 0, 1)
 
@@ -275,6 +325,8 @@ class Controller:
         if text == "a":
             oldWin.close()
             self.main.setEnabled(True)
+        if text == "h":
+            self.home(oldWin)
 
     # when that respective window is closed, this returns the screen back to the main screen
     def home(self, window):

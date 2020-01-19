@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6154c71-2a33-4873-ae8e-d5e4ee5711d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VRApplication.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VRApplication.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VRAppUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/VRAppUI.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +42,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
   </component>
   <component name="RunManager" selected="Python.VRAppUI">
     <configuration name="VRAppUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -140,12 +139,22 @@
       <option name="presentableId" value="Default" />
       <updated>1579409838962</updated>
     </task>
+    <task id="LOCAL-00001" summary="Adding and removing some files">
+      <created>1579450723793</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1579450723794</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
+    <MESSAGE value="Adding and removing some files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding and removing some files" />
   </component>
   <component name="WindowStateProjectService">
     <state x="283" y="212" key="#VRAppUI" timestamp="1579410464909">
@@ -156,30 +165,34 @@
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state x="304" y="404" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2194.1194@0.0.2194.1194" timestamp="1579432643173" />
+    <state x="695" y="192" key="CommitChangelistDialog2" timestamp="1579450723129">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state x="695" y="192" key="CommitChangelistDialog2/0.0.2194.1194@0.0.2194.1194" timestamp="1579450723129" />
     <state x="336" y="339" key="FileChooserDialogImpl" timestamp="1579409913318">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state x="336" y="339" key="FileChooserDialogImpl/0.0.2194.1194@0.0.2194.1194" timestamp="1579409913318" />
-    <state width="1110" height="330" key="GridCell.Tab.0.bottom" timestamp="1579434793430">
+    <state width="1510" height="330" key="GridCell.Tab.0.bottom" timestamp="1579452272871">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state width="1516" height="330" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
-    <state width="1110" height="330" key="GridCell.Tab.0.bottom/0.0.2194.1194@0.0.2194.1194" timestamp="1579434793430" />
-    <state width="1110" height="330" key="GridCell.Tab.0.center" timestamp="1579434793430">
+    <state width="1510" height="330" key="GridCell.Tab.0.bottom/0.0.2194.1194@0.0.2194.1194" timestamp="1579452272871" />
+    <state width="1510" height="330" key="GridCell.Tab.0.center" timestamp="1579452272871">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state width="1516" height="330" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
-    <state width="1110" height="330" key="GridCell.Tab.0.center/0.0.2194.1194@0.0.2194.1194" timestamp="1579434793430" />
-    <state width="1110" height="330" key="GridCell.Tab.0.left" timestamp="1579434793430">
+    <state width="1510" height="330" key="GridCell.Tab.0.center/0.0.2194.1194@0.0.2194.1194" timestamp="1579452272871" />
+    <state width="1510" height="330" key="GridCell.Tab.0.left" timestamp="1579452272871">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state width="1516" height="330" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
-    <state width="1110" height="330" key="GridCell.Tab.0.left/0.0.2194.1194@0.0.2194.1194" timestamp="1579434793430" />
-    <state width="1110" height="330" key="GridCell.Tab.0.right" timestamp="1579434793430">
+    <state width="1510" height="330" key="GridCell.Tab.0.left/0.0.2194.1194@0.0.2194.1194" timestamp="1579452272871" />
+    <state width="1510" height="330" key="GridCell.Tab.0.right" timestamp="1579452272871">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state width="1516" height="330" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
-    <state width="1110" height="330" key="GridCell.Tab.0.right/0.0.2194.1194@0.0.2194.1194" timestamp="1579434793430" />
+    <state width="1510" height="330" key="GridCell.Tab.0.right/0.0.2194.1194@0.0.2194.1194" timestamp="1579452272871" />
     <state width="1110" height="408" key="GridCell.Tab.1.bottom" timestamp="1579433015616">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
@@ -196,10 +209,10 @@
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state width="1110" height="408" key="GridCell.Tab.1.right/0.0.2194.1194@0.0.2194.1194" timestamp="1579433015616" />
-    <state x="65" y="240" key="SettingsEditor" timestamp="1579418474256">
+    <state x="65" y="240" key="SettingsEditor" timestamp="1579451182158">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
-    <state x="65" y="240" key="SettingsEditor/0.0.2194.1194@0.0.2194.1194" timestamp="1579418474256" />
+    <state x="65" y="240" key="SettingsEditor/0.0.2194.1194@0.0.2194.1194" timestamp="1579451182158" />
     <state x="258" y="269" width="672" height="678" key="search.everywhere.popup" timestamp="1579426157074">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
