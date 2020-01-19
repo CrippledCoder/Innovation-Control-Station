@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QApplication, QLabel, QSpacerItem, QComboBox, \
-    QVBoxLayout, QHBoxLayout, QMessageBox, QLineEdit, QAction
-from PyQt5 import QtWidgets, Qt, QtCore, QtGui
+    QVBoxLayout, QHBoxLayout, QMessageBox, QLineEdit,  QTableWidget, QTableWidgetItem, QHeaderView
+from PyQt5 import QtWidgets, Qt, QtCore
 from PyQt5.QtCore import *
 from PyQt5.QtCore import pyqtSlot
 import sys
@@ -221,9 +221,44 @@ class fileCopy(QWidget):
 
     def initUI(self):
         layout = QGridLayout()
+        rightLayout = QVBoxLayout()
         self.setWindowTitle(self.title)
         self.setFixedSize(self.width, self.height)
         self.setLayout(layout)
+
+
+        self.tableWidget = QTableWidget()
+        self.tableWidget.setRowCount(1)
+        self.tableWidget.setColumnCount(2)
+        self.tableWidget.setItem(0, 0, QTableWidgetItem("Cell (1,1)"))
+        self.tableWidget.setItem(0, 1, QTableWidgetItem("Cell (1,2)"))
+        self.tableWidget.setItem(1, 0, QTableWidgetItem("Cell (2,1)"))
+        self.tableWidget.setItem(1, 1, QTableWidgetItem("Cell (2,2)"))
+        self.tableWidget.setItem(2, 0, QTableWidgetItem("Cell (3,1)"))
+        self.tableWidget.setItem(2, 1, QTableWidgetItem("Cell (3,2)"))
+        self.tableWidget.setItem(3, 0, QTableWidgetItem("Cell (4,1)"))
+        self.tableWidget.setItem(3, 1, QTableWidgetItem("Cell (4,2)"))
+        self.tableWidget.move(0, 0)
+
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.setHorizontalHeaderLabels(['Source File', 'Destination File'])
+        self.tableWidget.horizontalHeaderItem(Qt.AlignHCenter)
+        self.tableWidget.verticalHeader().hide()
+
+        print(self.tableWidget.width())
+
+        layout.addWidget(self.tableWidget, 0, 0)
+        layout.addLayout(rightLayout, 0, 1)
+
+        addButton = QPushButton("Add File")
+        moveButton = QPushButton("Move Files")
+        rightLayout.addWidget(addButton)
+        rightLayout.addWidget(moveButton)
+        addButton.clicked.connect(self.increaseRow)
+
+    def increaseRow(self):
+        rowCount = self.tableWidget.model().rowCount()
+        self.tableWidget.setRowCount(rowCount+1)
 
 class AdminPanel(QWidget):
     """
@@ -270,7 +305,7 @@ class AdminPanel(QWidget):
 
         appStartButton.clicked.connect(self.appStarter)
         fileCopyButton.clicked.connect(self.fileCopy)
-        passChangeButton.clicked.connect(self.passChange)
+        passChangeButton.clicked.connect(self.passChanger)
         profileLoader.clicked.connect(self.profileLoad)
 
     @pyqtSlot()
@@ -281,7 +316,7 @@ class AdminPanel(QWidget):
         self.fCopy = fileCopy()
         self.fCopy.show()
 
-    def passChange(self):
+    def passChanger(self):
         self.pChange = passChange()
         self.pChange.show()
 
