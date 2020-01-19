@@ -6,6 +6,14 @@ from PyQt5.QtCore import *
 from PyQt5.QtCore import pyqtSlot
 import sys
 import hashlib, binascii, os
+from PyQt5 import QtWidgets
+from styleSheet import *
+
+def vSpacer(size):
+    return QSpacerItem(0, size, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+def hSpacer(size):
+    return QSpacerItem(size, 0, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
 class Login(QWidget):
     """
@@ -18,6 +26,9 @@ class Login(QWidget):
         On success of password -> admin panel
         On close of window -> main panel
 
+        attr:
+            lineEdit_password (QLineEdit): Sets attr of password container
+
         functions:
             initUI(self): This starts the specific window
             closeEvent(self): Handles the exiting of the window
@@ -28,50 +39,56 @@ class Login(QWidget):
             verify_password(self, stored_password, provided_password): Handles
                 the comparison of passwords from the user and the supplied file
     """
-    switch_window = QtCore.pyqtSignal(str, QWidget)
+    switchWindow = QtCore.pyqtSignal(str, QWidget)
 
     def __init__(self):
         super().__init__()
+        self.passwordContainer = QLineEdit()
         self.setWindowTitle('Login Form')
-        self.resize(500, 120)
+        self.resize(500, 200)
         self.initUI()
 
     def initUI(self):
-        layout = QGridLayout()
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint);
 
-        label_password = QLabel('<font size="4"> Password </font>')
-        self.lineEdit_password = QLineEdit()
-        self.lineEdit_password.setPlaceholderText('Please enter password')
-        layout.addWidget(label_password, 1, 0)
-        layout.addWidget(self.lineEdit_password, 1, 1)
-
-        button_login = QPushButton('Login')
-        button_login.clicked.connect(self.check_password)
-        layout.addWidget(button_login, 2, 0, 1, 2)
-        layout.setRowMinimumHeight(2, 75)
-
+        layout = QVBoxLayout()
         self.setLayout(layout)
+        inputLayout = QHBoxLayout()
+        buttonLayout = QHBoxLayout()
+
+        labelPassword = QLabel('<font size="3"> Password </font>')
+        self.passwordContainer.setPlaceholderText('Please enter password')
+        self.passwordContainer.setStyleSheet("font: 25px;")
+
+        #inputLayout.addWidget(labelPassword)
+        inputLayout.addWidget(self.passwordContainer)
+
+        buttonLogin = QPushButton('Login')
+        buttonLayout.addWidget(buttonLogin)
+        buttonLogin.clicked.connect(self.checkPassword)
+
+        buttonCancel = QPushButton('Cancel')
+        buttonLayout.addWidget(buttonCancel)
+        buttonCancel.clicked.connect(self.goBack)
+
+        layout.addLayout(inputLayout)
+        layout.addLayout(buttonLayout)
 
     # Good example of how to use the window close
-    def closeEvent(self, event):
-        try:
-            self.switch_window.emit("h", self)
-            event.accept()
-        except:
-            event.ignore()
+    def goBack(self):
+        self.switchWindow.emit("h", self)
 
-
-
-    def check_password(self):
+    def checkPassword(self):
         msg = QMessageBox()
-        enteredpass = str(self.lineEdit_password.text())
-        with open("login.txt","r") as file:
-            savedpass = file.read()
+        enteredPass = str(self.passwordContainer.text())
+        with open("login.txt", "r") as file:
+            savedPass = file.read()
 
-        if self.verify_password(savedpass, enteredpass):
-            msg.setText('Success')
-            msg.exec_()
-            self.switch_window.emit("a", self)
+        #if self.verify_password(savedPass, enteredPass):
+        if True:
+            #msg.setText('Success')
+            #msg.exec_()
+            self.switchWindow.emit("a", self)
         else:
             msg.setText('Incorrect Password')
             msg.exec_()
@@ -96,6 +113,57 @@ class Login(QWidget):
         return pwdhash == stored_password
 
 
+class AdminPanel(QWidget):
+    """
+
+    """
+    switchWindow = QtCore.pyqtSignal(str, QWidget)
+
+    def __init__(self):
+        super().__init__()
+        self.title = "Admin Panel"
+        self.width = 1500
+        self.height = 1000
+        self.initUI()
+
+    def initUI(self):
+        # DESIGN SECTION
+        # !!!!!!
+        # CHANGE LOGIN BACK
+        # !!!!!!!
+        layout = QGridLayout()
+        self.setWindowTitle(self.title)
+        self.setFixedSize(self.width, self.height)
+        self.setLayout(layout)
+
+
+        # Button Maker
+        freeFlyButton = QPushButton("Free Fly")
+        missionsButton = QPushButton("Missions")
+        customButton = QPushButton("Custom")
+        adminButton = QPushButton("Admin")
+
+        # Button Styler
+        freeFlyButton.setStyleSheet(buttonStyle)
+        missionsButton.setStyleSheet(buttonStyle)
+        customButton.setStyleSheet(buttonStyle)
+        adminButton.setStyleSheet(buttonStyle)
+
+        # bottom right quadrant
+        layout.addWidget(freeFlyButton, 0, 0)
+        layout.addWidget(missionsButton, 0, 1)
+        layout.addWidget(customButton, 1, 0)
+        layout.addWidget(adminButton, 1, 1)
+
+    def closeEvent(self, event):
+        msg = QMessageBox.question(self, "Close Admin", "Are you sure you want to close without saving?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No )
+        if msg == QMessageBox.Yes:
+            self.switchWindow.emit("h", self)
+            event.accept()
+        else:
+            event.ignore()
+
+
 class VRAppUI(QWidget):
     """
         The main window for the overall client.
@@ -115,13 +183,11 @@ class VRAppUI(QWidget):
             missionsClick(self): Handles the signal if missions is clicked
             customClick(self): Handles the signal if custom is clicked
             adminClick(self): Handles the signal if admin is clicked
-            vSpacer(self, size): A simple function to add a vertical spacer
-            hSpacer(self, size): A simple function to ad a horizontal spacer
     """
 
     switch_window = QtCore.pyqtSignal(str)
 
-    def __init__(self, parent=None):
+    def __init__(self):
         super().__init__()
         self.title = "Texan VR"
         self.width = 1500
@@ -132,6 +198,14 @@ class VRAppUI(QWidget):
         # DESIGN SECTION
         grid_layout = QGridLayout()  # outermost layout
         self.setLayout(grid_layout)
+        self.setWindowTitle(self.title)
+        self.setFixedSize(self.width, self.height)
+
+        # enable custom window hint
+        self.setWindowFlags(self.windowFlags() | QtCore.Qt.CustomizeWindowHint)
+
+        # disable (but not hide) close button
+        self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowCloseButtonHint)
 
         # halves
         rightLayout = QGridLayout()
@@ -142,8 +216,8 @@ class VRAppUI(QWidget):
 
         # Label Maker
         leftLabel = QLabel("")
-        rightTopSqLabel = QLabel("Squadron")
-        rightTopFlightLabel = QLabel("Flight")
+        rightTopSqLabel = QLabel("             Squadron")
+        rightTopFlightLabel = QLabel("                   Flight")
 
         # Button Maker
         freeFlyButton = QPushButton("Free Fly")
@@ -172,31 +246,7 @@ class VRAppUI(QWidget):
 
         # STYLE SHEET AREA
         # Button Styling
-        buttonStyle = '''QPushButton {
-                                        box-shadow: 3px 4px 0px 0px #1564ad;
-                                        background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0.05 #79bbff, stop:1 #378de5);
-                                        border-radius:10px;
-                                        border:1px solid #337bc4;
-                                        display:inline-block;
-                                        cursor:pointer;
-                                        color:#ffffff;
-                                        font-family:Arial;
-                                        font-size:40px;
-                                        font-weight:bold;
-                                        padding:12px 44px;
-                                        text-decoration:none;
-                                        text-shadow:0px 1px 0px #528ecc;
-                                        height: 80px;
-                                        }
-                            QPushButton:hover {
-                                        background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0.05 #378de5, stop:1 #79bbff);
-                                        background-color:#378de5;
-                                        }
-                             QPushButton:active {
-                                            position:relative;
-                                            top:1px;
-                                        }
-                                        '''
+
         freeFlyButton.setStyleSheet(buttonStyle)
         missionsButton.setStyleSheet(buttonStyle)
         customButton.setStyleSheet(buttonStyle)
@@ -223,14 +273,17 @@ class VRAppUI(QWidget):
                             </font>
                              </p>
                             ''')
-        rightTopSqLabel.setStyleSheet("font-weight: bold;")
-        rightTopFlightLabel.setStyleSheet("font-weight: bold;")
-        self.setStyleSheet("background-color: #72A0C1;")  # widget background
+        rightTopSqLabel.setStyleSheet("font: 30px; font-weight: bold;")
+        rightTopFlightLabel.setStyleSheet("font: 30px; font-weight: bold;")
+        self.setStyleSheet("background: #72A0C1;")  # widget background
+
+        comboFlight.setStyleSheet("font: 30px; background: white;")
+        comboSquadron.setStyleSheet("font: 30px; background: white;")
 
         # Alignments set
         leftLabel.setAlignment(Qt.AlignCenter)
-        rightTopSqLabel.setAlignment(Qt.AlignRight)
-        rightTopFlightLabel.setAlignment(Qt.AlignRight)
+        rightTopSqLabel.setAlignment(Qt.AlignVCenter)
+        rightTopFlightLabel.setAlignment(Qt.AlignVCenter)
 
         # ORGANIZING THE LAYOUTS
         # Main Grid
@@ -239,18 +292,19 @@ class VRAppUI(QWidget):
 
         # upper right quadrant
         rightLayout.addLayout(rightTopLayoutOuter, 0, 0)  # used a vertical layout
-        rightTopLayoutOuter.addItem(self.vSpacer(200))
+        rightTopLayoutOuter.addItem(vSpacer(200))
         rightTopLayoutOuter.addLayout(rightTopTopLayout)
+        rightTopTopLayout.addItem(vSpacer(200))
         rightTopLayoutOuter.addLayout(rightTopBottomLayout)
         rightTopTopLayout.addWidget(rightTopSqLabel)
         rightTopTopLayout.addWidget(comboSquadron)
-        rightTopTopLayout.addItem(self.hSpacer(200))
+        rightTopTopLayout.addItem(hSpacer(200))
         rightTopBottomLayout.addWidget(rightTopFlightLabel)
         rightTopBottomLayout.addWidget(comboFlight)
-        rightTopBottomLayout.addItem(self.hSpacer(200))
+        rightTopBottomLayout.addItem(hSpacer(200))
 
         # space out the right
-        rightLayout.addItem(self.vSpacer(200), 1, 0)
+        rightLayout.addItem(vSpacer(200), 1, 0)
 
         # bottom right quadrant
         rightLayout.addLayout(rightBottomLayout, 2, 0)  # big grid
@@ -260,17 +314,6 @@ class VRAppUI(QWidget):
         rightBottomLayout.addWidget(adminButton, 1, 1)
 
         grid_layout.setRowStretch(1, 0)
-        # example if a spacer is needed
-        # grid_layout.addItem(self.vSpacer(100), 3, 0)
-
-        self.setWindowTitle(self.title)
-        self.setFixedSize(self.width, self.height)
-
-        # enable custom window hint
-        self.setWindowFlags(self.windowFlags() | QtCore.Qt.CustomizeWindowHint)
-
-        # disable (but not hide) close button
-        self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowCloseButtonHint)
 
         # BUTTON ACTION SECTION
         freeFlyButton.clicked.connect(self.freePlayClick)
@@ -283,29 +326,40 @@ class VRAppUI(QWidget):
         self.switch_window.emit("f")
 
     def missionsClick(self):
-        print('Launching Missions...')
+        self.switch_window.emit("m")
 
     def customClick(self):
-        print('Launching Custom...')
+        self.switch_window.emit("c")
 
     def adminClick(self):
         self.switch_window.emit("l")
 
-    def vSpacer(self, size):
-        return QSpacerItem(0, size, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-    def hSpacer(self, size):
-        return QSpacerItem(size, 0, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
 class Controller:
+    """
+        This controls the opening and closing of windows and main selections
+        of where the user would like to be.
+
+        attr:
+            main(QWidget): Opens the first instance of the main window
+
+        functions:
+            start(self): Starts the controller at the point in which the program
+                is loaded
+            which(self, text, oldWin=None): The main controller. Decides which windows
+                open and close next based on signals from the previous classes
+            home(self, window): Takes the user from a sub window back to the disabled
+                main window and re-enables it
+    """
 
     # need this for every class
     def __init__(self):
-        pass
+        self.main = VRAppUI()
+        self.start()
 
     # this connects to the main function and gets the program going
     def start(self):
-        self.main = VRAppUI()
         self.main.switch_window.connect(self.which)
         self.main.show()
 
@@ -320,18 +374,25 @@ class Controller:
         if text == "l":
             self.login = Login()
             self.main.setEnabled(False)
-            self.login.switch_window.connect(self.which)
+            self.login.switchWindow.connect(self.which)
             self.login.show()
         if text == "a":
+            self.admin = AdminPanel()
             oldWin.close()
-            self.main.setEnabled(True)
+            self.main.hide()
+            self.admin.switchWindow.connect(self.which)
+            self.admin.show()
         if text == "h":
             self.home(oldWin)
 
     # when that respective window is closed, this returns the screen back to the main screen
     def home(self, window):
+        print("here")
         self.main.setEnabled(True)
         window.close()
+        self.main.show()
+        print("here")
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
@@ -342,5 +403,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
