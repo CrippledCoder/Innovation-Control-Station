@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QApplication, QLabel, QSpacerItem, QComboBox, \
-    QVBoxLayout, QHBoxLayout, QMessageBox, QLineEdit,  QTableWidget, QTableWidgetItem, QHeaderView
+    QVBoxLayout, QHBoxLayout, QMessageBox, QLineEdit,  QTableWidget, QTableWidgetItem, QFileDialog
 from PyQt5 import QtWidgets, Qt, QtCore
 from PyQt5.QtCore import *
 from PyQt5.QtCore import pyqtSlot
@@ -8,6 +8,8 @@ import sys
 import hashlib, binascii, os
 from PyQt5 import QtWidgets
 from styleSheet import *
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QImage, QPalette, QBrush
 
 '''
 def closeEvent(self, event):
@@ -217,6 +219,7 @@ class fileCopy(QWidget):
         self.title = "Admin Panel"
         self.width = 1500
         self.height = 1000
+        self.row = 0
         self.initUI()
 
     def initUI(self):
@@ -230,22 +233,15 @@ class fileCopy(QWidget):
         self.tableWidget = QTableWidget()
         self.tableWidget.setRowCount(1)
         self.tableWidget.setColumnCount(2)
-        self.tableWidget.setItem(0, 0, QTableWidgetItem("Cell (1,1)"))
-        self.tableWidget.setItem(0, 1, QTableWidgetItem("Cell (1,2)"))
-        self.tableWidget.setItem(1, 0, QTableWidgetItem("Cell (2,1)"))
-        self.tableWidget.setItem(1, 1, QTableWidgetItem("Cell (2,2)"))
-        self.tableWidget.setItem(2, 0, QTableWidgetItem("Cell (3,1)"))
-        self.tableWidget.setItem(2, 1, QTableWidgetItem("Cell (3,2)"))
-        self.tableWidget.setItem(3, 0, QTableWidgetItem("Cell (4,1)"))
-        self.tableWidget.setItem(3, 1, QTableWidgetItem("Cell (4,2)"))
         self.tableWidget.move(0, 0)
 
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.tableWidget.setHorizontalHeaderLabels(['Source File', 'Destination File'])
         self.tableWidget.horizontalHeaderItem(Qt.AlignHCenter)
         self.tableWidget.verticalHeader().hide()
+        self.tableWidget.setColumnWidth(0, 650)
+        self.tableWidget.setColumnWidth(1, 650)
 
-        print(self.tableWidget.width())
 
         layout.addWidget(self.tableWidget, 0, 0)
         layout.addLayout(rightLayout, 0, 1)
@@ -257,8 +253,26 @@ class fileCopy(QWidget):
         addButton.clicked.connect(self.increaseRow)
 
     def increaseRow(self):
-        rowCount = self.tableWidget.model().rowCount()
-        self.tableWidget.setRowCount(rowCount+1)
+        try:
+            #Source File Get
+            options = QFileDialog.Options()
+            options |= QFileDialog.DontUseNativeDialog
+            sourceFiles, _ = QFileDialog.getOpenFileNames(self, "SELECT SOURCE FILE TO MOVE", "",
+                                                    "All Files (*)", options=options)
+
+            #Get Dest File
+            options = QFileDialog.Options()
+            options |= QFileDialog.DontUseNativeDialog
+            destFiles, _ = QFileDialog.getOpenFileNames(self, "SELECT DESTINATION FOLDER", "",
+                                                    "All Files (*)", options=options)
+
+            if self.row != 0:
+                self.tableWidget.insertRow(self.row)
+            self.tableWidget.setItem(self.row, 0, QTableWidgetItem(sourceFiles[0]))
+            self.tableWidget.setItem(self.row, 1, QTableWidgetItem(destFiles[0]))
+            self.row += 1
+        except:
+            pass
 
 class AdminPanel(QWidget):
     """
@@ -358,6 +372,13 @@ class VRAppUI(QWidget):
         self.height = 1000
         self.initUI()
 
+        # Load the widget background picture
+        oImage = QImage("background.png")
+        sImage = oImage.scaled(QSize(1500, 1000))  # resize Image to widgets size
+        palette = QPalette()
+        palette.setBrush(QPalette.Window, QBrush(sImage))
+        self.setPalette(palette)
+
     def initUI(self):
         # DESIGN SECTION
         grid_layout = QGridLayout()  # outermost layout
@@ -417,8 +438,8 @@ class VRAppUI(QWidget):
         adminButton.setStyleSheet(buttonStyle)
 
         # Label Styling
-        leftLabel.setText('''<p>
-                                <font size="15"><b>Welcome to Texan VR <br>Control Center!</b></font>
+        leftLabel.setText('''<b><p>
+                                <font size="15">Welcome!</font>
                              </p>
                              <br>
                              <p>
@@ -430,16 +451,16 @@ class VRAppUI(QWidget):
                                 <i>Missions:</i> Select a pre-planned mission
                                 <br>
                                 <br>
-                                <i>Custom:</i> Select the parameters that fit your training
+                                <i>Custom:</i> Choose to make a custom flight
                                 <br>
                                 <br>
                                 <i>Admin:</i> For VR Admin use
                             </font>
                              </p>
+                             </b>
                             ''')
         rightTopSqLabel.setStyleSheet("font: 30px; font-weight: bold;")
         rightTopFlightLabel.setStyleSheet("font: 30px; font-weight: bold;")
-        self.setStyleSheet("background: #72A0C1;")  # widget background
 
         comboFlight.setStyleSheet("font: 30px; background: white;")
         comboSquadron.setStyleSheet("font: 30px; background: white;")

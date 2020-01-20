@@ -4,7 +4,6 @@
     <list default="true" id="e6154c71-2a33-4873-ae8e-d5e4ee5711d9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VRAppUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/VRAppUI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579464524634</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Working on the table widget to be able to do mass file movement.">
+      <created>1579468204236</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1579468204236</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -187,7 +193,8 @@
     <MESSAGE value="Working on the admin panel selection. Also added a style she so all that code doesn't need to be copied 10 times." />
     <MESSAGE value="Added a password changing function to the admin panel" />
     <MESSAGE value="Some testing turning it into an exe but it looks like everything is in the dist folder and completely deployable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some testing turning it into an exe but it looks like everything is in the dist folder and completely deployable" />
+    <MESSAGE value="Working on the table widget to be able to do mass file movement." />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on the table widget to be able to do mass file movement." />
   </component>
   <component name="WindowStateProjectService">
     <state x="283" y="212" key="#VRAppUI" timestamp="1579410464909">
@@ -198,58 +205,58 @@
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state x="304" y="404" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2194.1194@0.0.2194.1194" timestamp="1579457314357" />
-    <state x="695" y="192" key="CommitChangelistDialog2" timestamp="1579464520591">
+    <state x="695" y="192" key="CommitChangelistDialog2" timestamp="1579468203513">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
-    <state x="695" y="192" key="CommitChangelistDialog2/0.0.2194.1194@0.0.2194.1194" timestamp="1579464520591" />
+    <state x="695" y="192" key="CommitChangelistDialog2/0.0.2194.1194@0.0.2194.1194" timestamp="1579468203513" />
     <state x="336" y="339" key="FileChooserDialogImpl" timestamp="1579409913318">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state x="336" y="339" key="FileChooserDialogImpl/0.0.2194.1194@0.0.2194.1194" timestamp="1579409913318" />
-    <state width="1124" height="276" key="GridCell.Tab.0.bottom" timestamp="1579467242516">
+    <state width="2173" height="132" key="GridCell.Tab.0.bottom" timestamp="1579502506252">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state width="1516" height="330" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
-    <state width="1124" height="276" key="GridCell.Tab.0.bottom/0.0.2194.1194@0.0.2194.1194" timestamp="1579467242516" />
-    <state width="1124" height="276" key="GridCell.Tab.0.center" timestamp="1579467242516">
+    <state width="2173" height="132" key="GridCell.Tab.0.bottom/0.0.2194.1194@0.0.2194.1194" timestamp="1579502506252" />
+    <state width="2173" height="132" key="GridCell.Tab.0.center" timestamp="1579502506252">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state width="1516" height="330" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
-    <state width="1124" height="276" key="GridCell.Tab.0.center/0.0.2194.1194@0.0.2194.1194" timestamp="1579467242516" />
-    <state width="1124" height="276" key="GridCell.Tab.0.left" timestamp="1579467242516">
+    <state width="2173" height="132" key="GridCell.Tab.0.center/0.0.2194.1194@0.0.2194.1194" timestamp="1579502506252" />
+    <state width="2173" height="132" key="GridCell.Tab.0.left" timestamp="1579502506252">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state width="1516" height="330" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
-    <state width="1124" height="276" key="GridCell.Tab.0.left/0.0.2194.1194@0.0.2194.1194" timestamp="1579467242516" />
-    <state width="1124" height="276" key="GridCell.Tab.0.right" timestamp="1579467242516">
+    <state width="2173" height="132" key="GridCell.Tab.0.left/0.0.2194.1194@0.0.2194.1194" timestamp="1579502506252" />
+    <state width="2173" height="132" key="GridCell.Tab.0.right" timestamp="1579502506252">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state width="1516" height="330" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579412222041" />
-    <state width="1124" height="276" key="GridCell.Tab.0.right/0.0.2194.1194@0.0.2194.1194" timestamp="1579467242516" />
-    <state width="1110" height="408" key="GridCell.Tab.1.bottom" timestamp="1579433015616">
+    <state width="2173" height="132" key="GridCell.Tab.0.right/0.0.2194.1194@0.0.2194.1194" timestamp="1579502506252" />
+    <state width="1110" height="408" key="GridCell.Tab.1.bottom" timestamp="1579494110692">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
-    <state width="1110" height="408" key="GridCell.Tab.1.bottom/0.0.2194.1194@0.0.2194.1194" timestamp="1579433015616" />
-    <state width="1110" height="408" key="GridCell.Tab.1.center" timestamp="1579433015616">
+    <state width="1110" height="408" key="GridCell.Tab.1.bottom/0.0.2194.1194@0.0.2194.1194" timestamp="1579494110692" />
+    <state width="1110" height="408" key="GridCell.Tab.1.center" timestamp="1579494110692">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
-    <state width="1110" height="408" key="GridCell.Tab.1.center/0.0.2194.1194@0.0.2194.1194" timestamp="1579433015616" />
-    <state width="1110" height="408" key="GridCell.Tab.1.left" timestamp="1579433015616">
+    <state width="1110" height="408" key="GridCell.Tab.1.center/0.0.2194.1194@0.0.2194.1194" timestamp="1579494110692" />
+    <state width="1110" height="408" key="GridCell.Tab.1.left" timestamp="1579494110692">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
-    <state width="1110" height="408" key="GridCell.Tab.1.left/0.0.2194.1194@0.0.2194.1194" timestamp="1579433015616" />
-    <state width="1110" height="408" key="GridCell.Tab.1.right" timestamp="1579433015616">
+    <state width="1110" height="408" key="GridCell.Tab.1.left/0.0.2194.1194@0.0.2194.1194" timestamp="1579494110692" />
+    <state width="1110" height="408" key="GridCell.Tab.1.right" timestamp="1579494110692">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
-    <state width="1110" height="408" key="GridCell.Tab.1.right/0.0.2194.1194@0.0.2194.1194" timestamp="1579433015616" />
+    <state width="1110" height="408" key="GridCell.Tab.1.right/0.0.2194.1194@0.0.2194.1194" timestamp="1579494110692" />
     <state x="65" y="240" key="SettingsEditor" timestamp="1579464508710">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
     <state x="65" y="240" key="SettingsEditor/0.0.2194.1194@0.0.2194.1194" timestamp="1579464508710" />
-    <state x="360" y="334" key="Vcs.Push.Dialog.v2" timestamp="1579464528147">
+    <state x="360" y="334" key="Vcs.Push.Dialog.v2" timestamp="1579468206379">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
-    <state x="360" y="334" key="Vcs.Push.Dialog.v2/0.0.2194.1194@0.0.2194.1194" timestamp="1579464528147" />
+    <state x="360" y="334" key="Vcs.Push.Dialog.v2/0.0.2194.1194@0.0.2194.1194" timestamp="1579468206379" />
     <state x="258" y="269" width="672" height="678" key="search.everywhere.popup" timestamp="1579426157074">
       <screen x="0" y="0" width="2194" height="1194" />
     </state>
